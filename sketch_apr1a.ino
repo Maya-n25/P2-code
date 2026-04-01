@@ -1,5 +1,3 @@
-// vianae- practice change
-
 #include <Servo.h>
 
 Servo myServo;
@@ -18,3 +16,7 @@ delay(1000);
 myServo.write(180); // move to 180 degrees
 delay(1000);
 }
+
+
+
+//vianae - change 
