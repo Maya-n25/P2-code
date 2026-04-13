@@ -48,7 +48,7 @@ void setup() {
   pinMode(button5, INPUT_PULLUP);
 
   // starting positions for 180 servos
-  redServo.write(0);
+  redServo.write(180);
   red2Servo.write(0);
 
   // stop continuous servos
@@ -66,7 +66,7 @@ void loop() {
 
   // -------- INTERACTION 1 (SMOOTH 180° ONCE) --------
   if (digitalRead(button1) == LOW && !done1) {
-    for (int pos = 0; pos <= 180; pos += 5) {
+    for (int pos = 180; pos >= 0; pos -= 5) {
       redServo.write(pos);
       delay(15);
     }
@@ -75,7 +75,7 @@ void loop() {
 
   // -------- INTERACTION 2 (HALF SPIN ONCE) --------
   if (digitalRead(button2) == LOW && !spin2 && !done2) {
-    spinServo.write(170);
+    spinServo.write(10);
     t2 = millis();
     spin2 = true;
   }
@@ -97,7 +97,7 @@ void loop() {
 
   // -------- INTERACTION 4 (HALF SPIN ONCE) --------
   if (digitalRead(button4) == LOW && !spin4 && !done4) {
-    wolfServo.write(170);
+    wolfServo.write(10);
     t4 = millis();
     spin4 = true;
   }
