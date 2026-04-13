@@ -7,7 +7,9 @@ Servo red2Servo;
 Servo wolfServo;   
 Servo finalServo;  
 
-const int halfSpinTime = 450; 
+const int halfSpinTime = 300; 
+const int wolfSpinTime = 360;
+const int finalSpinTime = 1200;
 
 // TIMERS
 unsigned long t2 = 0;
@@ -50,6 +52,11 @@ void setup() {
   red2Servo.write(0);
 
   // stop continuous servos
+  spinServo.write(10);
+  wolfServo.write(10);
+
+  delay (450);
+  
   spinServo.write(90);
   wolfServo.write(90);
   finalServo.write(90);
@@ -95,7 +102,7 @@ void loop() {
     spin4 = true;
   }
 
-  if (spin4 && millis() - t4 >= halfSpinTime) {
+  if (spin4 && millis() - t4 >= wolfSpinTime) {
     wolfServo.write(90);
     spin4 = false;
     done4 = true;
@@ -108,8 +115,8 @@ void loop() {
     spin5 = true;
   }
 
-  if (spin5 && millis() - t5 >= halfSpinTime) {
-    finalServo.write(90);
+  if (spin5 && millis() - t5 >= finalSpinTime) {
+    finalServo.write(180);
     spin5 = false;
     done5 = true;
   }
