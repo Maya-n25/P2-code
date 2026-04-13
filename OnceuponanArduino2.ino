@@ -44,44 +44,59 @@ void setup() {
   pinMode(button3, INPUT_PULLUP);
   pinMode(button4, INPUT_PULLUP);
   pinMode(button5, INPUT_PULLUP);
+
+  // starting positions for 180 servos
+  redServo.write(0);
+  red2Servo.write(0);
+
+  // stop continuous servos
+  spinServo.write(90);
+  wolfServo.write(90);
+  finalServo.write(90);
 }
 
 void loop() {
 
-  // -------- INTERACTION 1 (180° ONCE) --------
+  // -------- INTERACTION 1 (SMOOTH 180° ONCE) --------
   if (digitalRead(button1) == LOW && !done1) {
-    redServo.write(180);
+    for (int pos = 0; pos <= 180; pos += 5) {
+      redServo.write(pos);
+      delay(15);
+    }
     done1 = true;
   }
 
   // -------- INTERACTION 2 (HALF SPIN ONCE) --------
   if (digitalRead(button2) == LOW && !spin2 && !done2) {
-    spinServo.write(170);   // spin
+    spinServo.write(170);
     t2 = millis();
     spin2 = true;
   }
 
   if (spin2 && millis() - t2 >= halfSpinTime) {
-    spinServo.write(90);    // stop
+    spinServo.write(90);
     spin2 = false;
     done2 = true;
   }
 
-  // -------- INTERACTION 3 (180° ONCE) --------
+  // -------- INTERACTION 3 (SMOOTH 180° ONCE) --------
   if (digitalRead(button3) == LOW && !done3) {
-    red2Servo.write(180);
+    for (int pos = 0; pos <= 180; pos += 5) {
+      red2Servo.write(pos);
+      delay(15);
+    }
     done3 = true;
   }
 
   // -------- INTERACTION 4 (HALF SPIN ONCE) --------
   if (digitalRead(button4) == LOW && !spin4 && !done4) {
-    wolfServo.write(170);  
+    wolfServo.write(170);
     t4 = millis();
     spin4 = true;
   }
 
   if (spin4 && millis() - t4 >= halfSpinTime) {
-    wolfServo.write(90);   // stop
+    wolfServo.write(90);
     spin4 = false;
     done4 = true;
   }
